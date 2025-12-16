@@ -77,12 +77,18 @@ class QuantizedDeepSeekOCRModel:
 
     def download(self, revision: str | None) -> None:
         with self._rwlock.gen_wlock():
+            # 检查模型是否已存在
+            existing_path = self._find_pretrained_path()
+            if existing_path is not None:
+                print(f"[QuantizedModel] 模型已存在: {existing_path}")
+                print("[QuantizedModel] 跳过下载")
+                return
+
             print(f"[QuantizedModel] 下载量化模型: {self._model_name}")
             snapshot_download(
                 repo_id=self._model_name,
                 repo_type="model",
                 revision=revision,
-                force_download=True,
                 cache_dir=self._cache_dir(),
             )
             if self._model_path is not None and self._find_pretrained_path() is None:
