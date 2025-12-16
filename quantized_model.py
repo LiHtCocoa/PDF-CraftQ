@@ -280,11 +280,16 @@ def apply_quantized_model_patch():
     必须在导入 pdf_craft 之前调用此函数
     """
     from doc_page_extractor import model as dpe_model
+    from doc_page_extractor import extractor as dpe_extractor
 
     print("[Patch] 应用量化模型 monkey-patch...")
     print(f"[Patch] 原始模型类: {dpe_model.DeepSeekOCRHugginfaceModel}")
 
+    # 替换 model 模块中的类
     dpe_model.DeepSeekOCRHugginfaceModel = QuantizedDeepSeekOCRModel
+
+    # 关键：同时替换 extractor 模块中已导入的引用
+    dpe_extractor.DeepSeekOCRHugginfaceModel = QuantizedDeepSeekOCRModel
 
     print(f"[Patch] 替换为: {dpe_model.DeepSeekOCRHugginfaceModel}")
     print("[Patch] Patch 应用成功!")
