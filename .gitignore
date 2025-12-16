@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Model path
+Jalea96/DeepSeek-OCR-bnb-4bit-NF4/
