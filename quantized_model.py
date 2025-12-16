@@ -227,9 +227,16 @@ class QuantizedDeepSeekOCRModel:
         return None
 
     def _find_pretrained_path(self) -> str | None:
-        assert self._model_path is not None
+        # 获取缓存基础目录
+        if self._model_path is not None:
+            base_cache_dir = self._model_path
+        else:
+            # 使用 HuggingFace 默认缓存目录
+            from huggingface_hub import constants
+            base_cache_dir = Path(constants.HF_HUB_CACHE)
+
         # 量化模型的缓存目录名
-        cache_model_dir = self._model_path / f"models--{self._model_name.replace('/', '--')}"
+        cache_model_dir = base_cache_dir / f"models--{self._model_name.replace('/', '--')}"
         if not cache_model_dir.exists():
             return None
 

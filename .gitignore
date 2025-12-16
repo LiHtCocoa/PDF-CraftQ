@@ -11,3 +11,7 @@ wheels/
 
 # Model path
 Jalea96/DeepSeek-OCR-bnb-4bit-NF4/
+
+# test output
+images/
+output.md
