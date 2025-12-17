@@ -16,3 +16,6 @@ Jalea96/DeepSeek-OCR-bnb-4bit-NF4/
 *_assets/
 images/
 output.md
+
+# only maintain test pdf
+*.pdf
