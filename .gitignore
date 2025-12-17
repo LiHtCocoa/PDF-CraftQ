@@ -13,5 +13,6 @@ wheels/
 Jalea96/DeepSeek-OCR-bnb-4bit-NF4/
 
 # test output
+*_assets/
 images/
 output.md
