@@ -46,14 +46,10 @@ def convert_to_markdown(
     if verbose:
         print(f"Converting {pdf_path} to Markdown...")
 
-    # Default assets path if not specified
-    if assets_path is None:
-        assets_path = output_path.parent / (output_path.stem + "_assets")
-
     result = transform_markdown(
         pdf_path=str(pdf_path),
         markdown_path=str(output_path),
-        markdown_assets_path=str(assets_path),
+        markdown_assets_path=str(assets_path) if assets_path else None,
         ocr_size=ocr_size,
         local_only=local_only,
         includes_footnotes=includes_footnotes,
@@ -65,7 +61,7 @@ def convert_to_markdown(
         print(f"  Input tokens: {result.input_tokens}")
         print(f"  Output tokens: {result.output_tokens}")
         print(f"  Output: {output_path}")
-        if assets_path.exists():
+        if assets_path and assets_path.exists():
             print(f"  Assets: {assets_path}")
 
 
